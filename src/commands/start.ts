@@ -18,7 +18,7 @@ Designed with simplicity and security in mind, NANAbot makes it easier than ever
   const options = {
     reply_markup: {
       inline_keyboard: [
-        [{ text: "Check Balance 💰", callback_data: "check_balance" }],
+        [{ text: "Quick Guide 📖", callback_data: "quick_guide" }],
       ],
     },
   };
@@ -28,8 +28,19 @@ Designed with simplicity and security in mind, NANAbot makes it easier than ever
     const chatId = callbackQuery.message?.chat.id || "";
     const data = callbackQuery.data;
 
-    if (data === "check_balance") {
-      bot.sendMessage(chatId, "Your current balance is 0.05 BTC.");
+    const message = `
+Quick Guide 📖  
+
+1. To check your wallet balance, simply type /balance.
+2. To send SOL tokens, type /send followed by the recipient's address and the amount.
+3. To view your wallet address, type /address.
+4. To sign transactions, type /sign followed by the transaction message.
+5. To view your transaction history, type /history.
+6. For help, type /help.
+    `;
+
+    if (data === "quick_guide") {
+      bot.sendMessage(chatId, message);
     }
 
     bot.answerCallbackQuery(callbackQuery.id);
