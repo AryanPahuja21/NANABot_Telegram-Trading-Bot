@@ -5,6 +5,7 @@ import { start } from "./commands/start";
 import connectDB from "./config/db";
 import { register } from "./commands/register";
 import { help } from "./commands/help";
+import { balance } from "./commands/balance";
 
 dotenv.config();
 
@@ -24,3 +25,4 @@ const bot = new TelegramBot(token, { polling: true });
 bot.onText(/\/start/, (msg) => start(bot, msg));
 bot.onText(/\/register/, (msg) => register(bot, msg));
 bot.onText(/\/help/, (msg) => help(bot, msg));
+bot.onText(/\/balance/, (msg) => balance(bot, msg));
