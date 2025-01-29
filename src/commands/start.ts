@@ -43,7 +43,7 @@ Quick Guide 📖
 3. To view your wallet address, type /address.
 4. To sign transactions, type /sign followed by the transaction message.
 5. To view your transaction history, type /history.
-6. For help, type /help.
+6. To view all commands, type /help.
     `;
 
     if (data === "get_started") {
