@@ -18,6 +18,7 @@ Designed with simplicity and security in mind, NANAbot makes it easier than ever
   const options = {
     reply_markup: {
       inline_keyboard: [
+        [{ text: "Get Started 🚀", callback_data: "get_started" }],
         [{ text: "Quick Guide 📖", callback_data: "quick_guide" }],
       ],
     },
@@ -28,7 +29,13 @@ Designed with simplicity and security in mind, NANAbot makes it easier than ever
     const chatId = callbackQuery.message?.chat.id || "";
     const data = callbackQuery.data;
 
-    const message = `
+    const getStartedMessage = `
+Get Started 🚀
+
+Create an account by typing /register to generate a new wallet address.
+`;
+
+    const quickGuidMessage = `
 Quick Guide 📖  
 
 1. To check your wallet balance, simply type /balance.
@@ -39,8 +46,10 @@ Quick Guide 📖
 6. For help, type /help.
     `;
 
-    if (data === "quick_guide") {
-      bot.sendMessage(chatId, message);
+    if (data === "get_started") {
+      bot.sendMessage(chatId, getStartedMessage);
+    } else if (data === "quick_guide") {
+      bot.sendMessage(chatId, quickGuidMessage);
     }
 
     bot.answerCallbackQuery(callbackQuery.id);
