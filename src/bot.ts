@@ -8,6 +8,7 @@ import { help } from "./commands/help";
 import { balance } from "./commands/balance";
 import { address } from "./commands/address";
 import { send } from "./commands/send";
+import { history } from "./commands/history";
 
 dotenv.config();
 
@@ -32,3 +33,4 @@ bot.onText(/\/address/, (msg) => address(bot, msg));
 bot.onText(/\/send(?:\s+(\S+))?(?:\s+(\d+(\.\d+)?))?/, (msg, match) =>
   send(bot, msg, match)
 );
+bot.onText(/\/history/, (msg) => history(bot, msg));
