@@ -9,6 +9,7 @@ import {
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
+import { decryptPrivateKey } from "../utils/cryptoUtils";
 
 export const send = async (
   bot: TelegramBot,
@@ -56,9 +57,11 @@ export const send = async (
         "❌ Private key is missing. Please register again."
       );
     }
+
     const senderKeypair = Keypair.fromSecretKey(
-      new Uint8Array(Buffer.from(user.privateKey, "hex"))
+      Uint8Array.from(Buffer.from(decryptPrivateKey(user.privateKey), "hex"))
     );
+
     const recipientPublicKey = new PublicKey(recipientAddress);
 
     const lamports = amountSOL * 1_000_000_000;

@@ -1,6 +1,7 @@
 import TelegramBot, { Message } from "node-telegram-bot-api";
 import { User } from "../schemas/userSchema";
 import { Keypair } from "@solana/web3.js";
+import { encryptPrivateKey } from "../utils/cryptoUtils";
 
 export const register = async (bot: TelegramBot, msg: Message) => {
   const userId = msg.from?.id;
@@ -22,10 +23,14 @@ Type /help to get a quick overview of the commands.
 
   const keypair = Keypair.generate();
 
+  const encryptedPrivateKey = encryptPrivateKey(
+    Buffer.from(keypair.secretKey).toString("hex")
+  );
+
   await User.create({
     userId,
     publicKey: keypair.publicKey.toBase58(),
-    privateKey: Buffer.from(keypair.secretKey).toString("hex"),
+    privateKey: encryptedPrivateKey,
   });
 
   bot.sendMessage(
