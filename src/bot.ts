@@ -7,6 +7,7 @@ import { register } from "./commands/register";
 import { help } from "./commands/help";
 import { balance } from "./commands/balance";
 import { address } from "./commands/address";
+import { send } from "./commands/send";
 
 dotenv.config();
 
@@ -28,3 +29,6 @@ bot.onText(/\/register/, (msg) => register(bot, msg));
 bot.onText(/\/help/, (msg) => help(bot, msg));
 bot.onText(/\/balance/, (msg) => balance(bot, msg));
 bot.onText(/\/address/, (msg) => address(bot, msg));
+bot.onText(/\/send(?:\s+(\S+))?(?:\s+(\d+(\.\d+)?))?/, (msg, match) =>
+  send(bot, msg, match)
+);
